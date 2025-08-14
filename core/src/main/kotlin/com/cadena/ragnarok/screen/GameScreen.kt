@@ -1,14 +1,18 @@
 package com.cadena.ragnarok.screen
 
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.viewport.ExtendViewport
+import com.cadena.ragnarok.component.AnimationComponent
+import com.cadena.ragnarok.component.AnimationType
 import com.cadena.ragnarok.component.ImageComponent
 import com.cadena.ragnarok.component.ImageComponent.Companion.ImageComponentListener
 import com.cadena.ragnarok.system.RenderSystem
 import com.github.quillraven.fleks.World
+import com.github.quillraven.mysticwoods.system.AnimationSystem
 import ktx.app.KtxScreen
 import ktx.assets.disposeSafely
 import ktx.log.logger
@@ -16,13 +20,16 @@ import ktx.log.logger
 class GameScreen : KtxScreen {
 
     private val stage : Stage = Stage(ExtendViewport(16f, 9f))
-    private val playerTexture:Texture = Texture("assets/graphics/Novice_Male.png")
-    private val poringTexture:Texture = Texture("assets/graphics/Poring_SantaPoring_Angeling.png")
+
+    private val textureAtlas = TextureAtlas("assets/graphics/ragnarokObjects.atlas")
+
     private val world:World = World{
         inject(stage)
+        inject(textureAtlas)
 
         componentListener<ImageComponentListener>()
 
+        system<AnimationSystem>()
         system<RenderSystem>()
     }
 
@@ -31,18 +38,24 @@ class GameScreen : KtxScreen {
 
         world.entity{
             add<ImageComponent>{
-                image = Image(TextureRegion(playerTexture, 48, 88)).apply {
+                image = Image(TextureRegion(textureAtlas.findRegion("Novice_Male"), 0, 0, 48, 88)).apply {
                     setSize(3f, 4.5f,)
                 }
+            }
+            add<AnimationComponent>{
+                nextAnimation("Novice_Male", AnimationType.IDLE)
             }
         }
 
         world.entity{
             add<ImageComponent>{
-                image = Image(TextureRegion(poringTexture, 48, 48)).apply {
+                image = Image(TextureRegion(textureAtlas.findRegion("Poring_SantaPoring_Angeling"), 0, 0, 48, 48)).apply {
                     setSize(2f, 2f,)
                     setPosition(12f, 0f)
                 }
+            }
+            add<AnimationComponent>{
+                nextAnimation("Poring_SantaPoring_Angeling", AnimationType.IDLE)
             }
         }
     }
@@ -57,8 +70,7 @@ class GameScreen : KtxScreen {
 
     override fun dispose() {
         stage.disposeSafely()
-        playerTexture.disposeSafely()
-        poringTexture.disposeSafely()
+        textureAtlas.disposeSafely()
         world.dispose()
     }
 
