@@ -35,14 +35,6 @@ class GameScreen : KtxScreen {
                 }
             }
         }
-
-        stage.addActor(
-            Image(texture).apply {
-                setPosition(1f, 1f)
-                setSize(1f, 1f,)
-                setScaling(Scaling.fill)
-            }
-        )
     }
 
     override fun resize(width: Int, height: Int) {
