@@ -4,14 +4,14 @@ package com.cadena.ragnarok.lwjgl3
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
-import com.cadena.ragnarok.Main
+import com.cadena.ragnarok.RagnarokMain
 
 /** Launches the desktop (LWJGL3) application. */
 fun main() {
     // This handles macOS support and helps on Windows.
     if (StartupHelper.startNewJvmIfRequired())
       return
-    Lwjgl3Application(Main(), Lwjgl3ApplicationConfiguration().apply {
+    Lwjgl3Application(RagnarokMain(), Lwjgl3ApplicationConfiguration().apply {
         setTitle("RagnarokKotlinJDK21")
         //// Vsync limits the frames per second to what your hardware can display, and helps eliminate
         //// screen tearing. This setting doesn't always work on Linux, so the line after is a safeguard.
