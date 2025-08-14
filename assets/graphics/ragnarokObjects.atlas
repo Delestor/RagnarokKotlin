@@ -1,7 +1,38 @@
 ragnarokObjects.png
 size:2048,1024
 repeat:none
-Novice_Male
-bounds:0,0,800,894
-Poring_SantaPoring_Angeling
-bounds:800,336,629,558
+Novice_Male/idle
+  rotate: false
+  xy: 54, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 0
+Novice_Male/idle
+  rotate: false
+  xy: 418, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 1
+Novice_Male/idle
+  rotate: false
+  xy: 678, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 2
+Novice_Male/idle
+  rotate: false
+  xy: 782, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 3
+Poring_SantaPoring_Angeling/idle
+  rotate: false
+  xy: 54, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: 2

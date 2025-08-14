@@ -31,6 +31,7 @@ class AnimationSystem(
         }else{
             aniCmp.animation = animation(aniCmp.nextAnimation)
             aniCmp.stateTime = 0f
+            aniCmp.nextAnimation = NO_ANIMATION
         }
 
         aniCmp.animation.playMode = aniCmp.playMode
@@ -51,5 +52,9 @@ class AnimationSystem(
     companion object {
         private val LOG = logger<AnimationSystem>()
         private const val DEFAULT_FRAME_DURATION = 1 / 8f
+    }
+
+    override fun onDispose() {
+        textureAtlas.dispose()
     }
 }

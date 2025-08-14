@@ -17,7 +17,6 @@ class AnimationComponent (
     lateinit var animation : Animation<TextureRegionDrawable>
 
     var nextAnimation: String = NO_ANIMATION
-        private set
 
     fun nextAnimation(atlasKey: String, type: AnimationType) {
         this.atlasKey = atlasKey

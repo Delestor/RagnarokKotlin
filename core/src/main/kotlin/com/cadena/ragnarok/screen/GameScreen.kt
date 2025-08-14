@@ -38,7 +38,7 @@ class GameScreen : KtxScreen {
 
         world.entity{
             add<ImageComponent>{
-                image = Image(TextureRegion(textureAtlas.findRegion("Novice_Male"), 0, 0, 48, 88)).apply {
+                image = Image().apply {
                     setSize(3f, 4.5f,)
                 }
             }
@@ -49,7 +49,7 @@ class GameScreen : KtxScreen {
 
         world.entity{
             add<ImageComponent>{
-                image = Image(TextureRegion(textureAtlas.findRegion("Poring_SantaPoring_Angeling"), 0, 0, 48, 48)).apply {
+                image = Image().apply {
                     setSize(2f, 2f,)
                     setPosition(12f, 0f)
                 }
