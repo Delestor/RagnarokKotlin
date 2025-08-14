@@ -1,9 +1,9 @@
 package com.cadena.ragnarok.screen
 
 import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.graphics.g2d.TextureRegion
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
-import com.badlogic.gdx.utils.Scaling
 import com.badlogic.gdx.utils.viewport.ExtendViewport
 import com.cadena.ragnarok.component.ImageComponent
 import com.cadena.ragnarok.component.ImageComponent.Companion.ImageComponentListener
@@ -16,7 +16,8 @@ import ktx.log.logger
 class GameScreen : KtxScreen {
 
     private val stage : Stage = Stage(ExtendViewport(16f, 9f))
-    private val texture:Texture = Texture("assets/graphics/Novice_Male.png")
+    private val playerTexture:Texture = Texture("assets/graphics/Novice_Male.png")
+    private val poringTexture:Texture = Texture("assets/graphics/Poring_SantaPoring_Angeling.png")
     private val world:World = World{
         inject(stage)
 
@@ -30,8 +31,17 @@ class GameScreen : KtxScreen {
 
         world.entity{
             add<ImageComponent>{
-                image = Image(texture).apply {
-                    setSize(4f, 4f,)
+                image = Image(TextureRegion(playerTexture, 48, 88)).apply {
+                    setSize(3f, 4.5f,)
+                }
+            }
+        }
+
+        world.entity{
+            add<ImageComponent>{
+                image = Image(TextureRegion(poringTexture, 48, 48)).apply {
+                    setSize(2f, 2f,)
+                    setPosition(12f, 0f)
                 }
             }
         }
@@ -47,7 +57,8 @@ class GameScreen : KtxScreen {
 
     override fun dispose() {
         stage.disposeSafely()
-        texture.disposeSafely()
+        playerTexture.disposeSafely()
+        poringTexture.disposeSafely()
         world.dispose()
     }
 
