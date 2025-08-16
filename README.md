@@ -39,3 +39,8 @@ webs de sprites:
 https://www.spriters-resource.com/pc_computer/ragnarokonline/sheet/141313/
 
 https://spritedatabase.net/game/790
+
+Obtener Sprites:
+
+GIMP SpriteAtlas:
+https://github.com/BdR76/GimpSpriteAtlas?tab=readme-ov-file
