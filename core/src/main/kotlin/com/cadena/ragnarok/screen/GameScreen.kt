@@ -43,7 +43,7 @@ class GameScreen : KtxScreen {
                 }
             }
             add<AnimationComponent>{
-                nextAnimation("Novice_Male", AnimationType.IDLE)
+                nextAnimation("Novie_Male", AnimationType.WALK_LEFT)
             }
         }
 
@@ -55,7 +55,7 @@ class GameScreen : KtxScreen {
                 }
             }
             add<AnimationComponent>{
-                nextAnimation("Poring_SantaPoring_Angeling", AnimationType.IDLE)
+                nextAnimation("Novie_Male", AnimationType.WALK_LEFT)
             }
         }
     }

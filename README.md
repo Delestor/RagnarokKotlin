@@ -43,4 +43,9 @@ https://spritedatabase.net/game/790
 Obtener Sprites:
 
 GIMP SpriteAtlas:
+
 https://github.com/BdR76/GimpSpriteAtlas?tab=readme-ov-file
+
+RO Tools:
+
+https://ratemyserver.net/index.php?page=download_tool

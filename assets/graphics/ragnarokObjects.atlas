@@ -1,38 +1,55 @@
+
 ragnarokObjects.png
-size:2048,1024
-repeat:none
-Novice_Male/idle
+size: 512, 128
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+Novie_Male/walk_left
   rotate: false
-  xy: 54, 2
-  size: 48, 48
-  orig: 48, 48
+  xy: 0, 0
+  size: 49, 71
+  orig: 49, 71
   offset: 0, 0
-  index: 0
-Novice_Male/idle
+  index: -1
+Novie_Male/walk_left
   rotate: false
-  xy: 418, 2
-  size: 48, 48
-  orig: 48, 48
+  xy: 49, 0
+  size: 49, 71
+  orig: 49, 71
   offset: 0, 0
-  index: 1
-Novice_Male/idle
+  index: -1
+Novie_Male/walk_left
   rotate: false
-  xy: 678, 2
-  size: 48, 48
-  orig: 48, 48
+  xy: 98, 0
+  size: 49, 71
+  orig: 49, 71
   offset: 0, 0
-  index: 2
-Novice_Male/idle
+  index: -1
+Novie_Male/walk_left
   rotate: false
-  xy: 782, 2
-  size: 48, 48
-  orig: 48, 48
+  xy: 147, 0
+  size: 49, 71
+  orig: 49, 71
   offset: 0, 0
-  index: 3
-Poring_SantaPoring_Angeling/idle
+  index: -1
+Novie_Male/walk_left
   rotate: false
-  xy: 54, 2
-  size: 48, 48
-  orig: 48, 48
+  xy: 196, 0
+  size: 49, 71
+  orig: 49, 71
   offset: 0, 0
-  index: 2
+  index: -1
+Novie_Male/walk_left
+  rotate: false
+  xy: 245, 0
+  size: 49, 71
+  orig: 49, 71
+  offset: 0, 0
+  index: -1
+Novie_Male/walk_left
+  rotate: false
+  xy: 294, 0
+  size: 49, 71
+  orig: 49, 71
+  offset: 0, 0
+  index: -1
