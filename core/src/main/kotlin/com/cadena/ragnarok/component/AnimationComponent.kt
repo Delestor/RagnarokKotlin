@@ -3,6 +3,10 @@ package com.cadena.ragnarok.component
 import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 
+enum class AnimationModel{
+
+}
+
 enum class AnimationType{
     IDLE, RUN, ATTACK, DEATH, WALK_FRONT, WALK_LEFT;
 
