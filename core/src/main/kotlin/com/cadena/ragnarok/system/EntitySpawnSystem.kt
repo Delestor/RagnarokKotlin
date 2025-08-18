@@ -61,6 +61,16 @@ class EntitySpawnSystem(
                     }
                 }
 
+                if(cfg.speedScaling > 0f){
+                    add<MoveComponent>{
+                        speed = DEFAULT_SPEED * cfg.speedScaling
+                    }
+                }
+
+                if(type == "novice_male"){
+                    add<PlayerComponent>()
+                }
+
             }
         }
         world.remove(entity)

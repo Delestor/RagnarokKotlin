@@ -10,10 +10,8 @@ import com.cadena.ragnarok.component.ImageComponent.Companion.ImageComponentList
 import com.cadena.ragnarok.component.PhysicComponent.Companion.PhysicComponentListener
 import com.cadena.ragnarok.event.MapChangeEvent
 import com.cadena.ragnarok.event.fire
-import com.cadena.ragnarok.system.DebugSystem
-import com.cadena.ragnarok.system.EntitySpawnSystem
-import com.cadena.ragnarok.system.PhysicSystem
-import com.cadena.ragnarok.system.RenderSystem
+import com.cadena.ragnarok.input.PlayerKeyboardInputProcessor
+import com.cadena.ragnarok.system.*
 import com.github.quillraven.fleks.World
 import com.github.quillraven.mysticwoods.system.AnimationSystem
 import ktx.app.KtxScreen
@@ -40,6 +38,7 @@ class GameScreen : KtxScreen {
         componentListener<PhysicComponentListener>()
 
         system<EntitySpawnSystem>()
+        system<MoveSystem>()
         system<PhysicSystem>()
         system<AnimationSystem>()
         system<RenderSystem>()
@@ -56,6 +55,8 @@ class GameScreen : KtxScreen {
         }
         currentMap = TmxMapLoader().load("map/map1.tmx")
         stage.fire(MapChangeEvent(currentMap!!))
+
+        PlayerKeyboardInputProcessor(eWorld, eWorld.mapper())
     }
 
     override fun resize(width: Int, height: Int) {

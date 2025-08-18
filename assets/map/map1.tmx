@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="8">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="12">
  <tileset firstgid="1" name="map" tilewidth="64" tileheight="64" spacing="6" margin="3" tilecount="7" columns="7">
   <image source="../graphics/map.png" width="512" height="128"/>
  </tileset>
@@ -14,22 +14,26 @@
  </tileset>
  <layer id="1" name="ground" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgYBnFo3gUj+JhghnxYFrax4oHU9MtxNhHrFtIsZNc+3C5gRg7malsL7L/6eFPYu2ntZ3Y7KennSMVAwA8cAnR
+   eJxjYWBgYBnFo3gUj+JhghnxYFrax4oHU9MtxNhHrFtIsZNc+3C5gd52ovufnnYSsp/WdmKzn552jlQMAEHwCdM=
   </data>
  </layer>
  <layer id="2" name="bgd_1" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4CBgQkLppe9+Pij9o6CUTAKRsEoGIoAAJ8AABc=
+   eJxjYBgFo4CBgQkLppe9+Pij9o6CUTAKBgqM5s9RQAkAAKOAABk=
   </data>
  </layer>
  <layer id="3" name="fgd_1" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4AwYMZBj4JRMApGwSgYBaMAEwAAShAACg==
+   eJxjYBgFo4AwYMZBj4JRMApGwXADo+XbKKAGAABQ6AAN
   </data>
  </layer>
  <objectgroup id="4" name="entities">
   <object id="5" type="novice_male" gid="8" x="152" y="1134" width="49" height="71"/>
   <object id="6" type="poring" gid="9" x="126" y="998" width="60" height="48"/>
   <object id="7" type="poring" gid="9" x="268" y="1136" width="60" height="48"/>
+  <object id="8" type="poring" gid="9" x="142" y="936" width="60" height="48"/>
+  <object id="9" type="poring" gid="9" x="156" y="868" width="60" height="48"/>
+  <object id="10" type="poring" gid="9" x="240" y="882" width="60" height="48"/>
+  <object id="11" type="poring" gid="9" x="262" y="944" width="60" height="48"/>
  </objectgroup>
 </map>
