@@ -3,6 +3,7 @@ package com.cadena.ragnarok.screen
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.maps.tiled.TiledMap
 import com.badlogic.gdx.maps.tiled.TmxMapLoader
 import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Stage
@@ -15,6 +16,7 @@ import com.cadena.ragnarok.component.ImageComponent
 import com.cadena.ragnarok.component.ImageComponent.Companion.ImageComponentListener
 import com.cadena.ragnarok.event.MapChangeEvent
 import com.cadena.ragnarok.event.fire
+import com.cadena.ragnarok.system.EntitySpawnSystem
 import com.cadena.ragnarok.system.RenderSystem
 import com.github.quillraven.fleks.World
 import com.github.quillraven.mysticwoods.system.AnimationSystem
@@ -25,8 +27,8 @@ import ktx.log.logger
 class GameScreen : KtxScreen {
 
     private val stage : Stage = Stage(ExtendViewport(16f, 9f))
-
     private val textureAtlas = TextureAtlas("assets/graphics/ragnarokObjects.atlas")
+    private var currentMap : TiledMap? = null
 
     private val world:World = World{
         inject(stage)
@@ -34,6 +36,7 @@ class GameScreen : KtxScreen {
 
         componentListener<ImageComponentListener>()
 
+        system<EntitySpawnSystem>()
         system<AnimationSystem>()
         system<RenderSystem>()
     }
@@ -46,31 +49,8 @@ class GameScreen : KtxScreen {
                 stage.addListener(system)
             }
         }
-        val tiledMap = TmxMapLoader().load("map/map1.tmx")
-        stage.fire(MapChangeEvent(tiledMap))
-
-        world.entity{
-            add<ImageComponent>{
-                image = Image().apply {
-                    setSize(3f, 4.5f,)
-                }
-            }
-            add<AnimationComponent>{
-                nextAnimation(AnimationModel.NOVICE_MALE, AnimationType.WALK_LEFT)
-            }
-        }
-
-        world.entity{
-            add<ImageComponent>{
-                image = Image().apply {
-                    setSize(2f, 2f,)
-                    setPosition(12f, 0f)
-                }
-            }
-            add<AnimationComponent>{
-                nextAnimation(AnimationModel.PORING, AnimationType.IDLE)
-            }
-        }
+        currentMap = TmxMapLoader().load("map/map1.tmx")
+        stage.fire(MapChangeEvent(currentMap!!))
     }
 
     override fun resize(width: Int, height: Int) {
@@ -85,6 +65,7 @@ class GameScreen : KtxScreen {
         stage.disposeSafely()
         textureAtlas.disposeSafely()
         world.dispose()
+        currentMap?.disposeSafely()
     }
 
     companion object{

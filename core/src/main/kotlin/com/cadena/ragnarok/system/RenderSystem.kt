@@ -7,6 +7,7 @@ import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile
 import com.badlogic.gdx.scenes.scene2d.Event
 import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.cadena.ragnarok.RagnarokMain.Companion.UNIT_SCALE
 import com.cadena.ragnarok.component.ImageComponent
 import com.cadena.ragnarok.event.MapChangeEvent
 import com.github.quillraven.fleks.*
@@ -24,7 +25,7 @@ class RenderSystem(
 ){
     private val bgdLayers = mutableListOf<TiledMapTileLayer>()
     private val fgdLayers = mutableListOf<TiledMapTileLayer>()
-    private val mapRenderer = OrthogonalTiledMapRenderer(null, 1/64f,stage.batch)
+    private val mapRenderer = OrthogonalTiledMapRenderer(null, UNIT_SCALE,stage.batch)
     private val orthoCam = stage.camera as OrthographicCamera
 
     override fun onTick() {

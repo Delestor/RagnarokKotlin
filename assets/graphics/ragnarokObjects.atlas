@@ -1,6 +1,9 @@
 ragnarokObjects.png
 size:1024,128
 repeat:none
+novice_male/idle
+index:1
+bounds:0,0,49,71
 novice_male/walk_left
 index:1
 bounds:0,0,49,71

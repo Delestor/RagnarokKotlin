@@ -13,4 +13,8 @@ class RagnarokMain : KtxGame<KtxScreen>(){
         addScreen(GameScreen())
         setScreen<GameScreen>()
     }
+
+    companion object{
+        const val UNIT_SCALE = 1/64f
+    }
 }
