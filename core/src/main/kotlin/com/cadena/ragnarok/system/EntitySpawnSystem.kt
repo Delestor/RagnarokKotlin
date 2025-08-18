@@ -2,18 +2,22 @@ package com.cadena.ragnarok.system
 
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.physics.box2d.BodyDef
+import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Event
 import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.Scaling
 import com.cadena.ragnarok.RagnarokMain.Companion.UNIT_SCALE
 import com.cadena.ragnarok.component.*
+import com.cadena.ragnarok.component.PhysicComponent.Companion.physicCmpFromImage
 import com.cadena.ragnarok.event.MapChangeEvent
 import com.github.quillraven.fleks.AllOf
 import com.github.quillraven.fleks.ComponentMapper
 import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.IteratingSystem
 import ktx.app.gdxError
+import ktx.box2d.box
 import ktx.math.vec2
 import ktx.tiled.layer
 import ktx.tiled.type
@@ -22,6 +26,7 @@ import ktx.tiled.y
 
 @AllOf([SpawnComponent::class])
 class EntitySpawnSystem(
+    private val phWorld:World,
     private val atlas:TextureAtlas,
     private val spawnCmps:ComponentMapper<SpawnComponent>
 ) : EventListener, IteratingSystem(){
@@ -33,16 +38,29 @@ class EntitySpawnSystem(
             val cfg = spawnCfg(type)
             val relativeSize = size(cfg.model)
             world.entity{
-                add<ImageComponent>{
+
+                //Carga de la Imagen
+                val imageCmp = add<ImageComponent>{
                     image = Image().apply {
                         setPosition(location.x, location.y)
                         setSize(relativeSize.x, relativeSize.y)
                         setScaling(Scaling.fill)
                     }
                 }
+
+                //Carga de la Animación
                 add<AnimationComponent>{
                     nextAnimation(cfg.model, AnimationType.IDLE)
                 }
+
+                //Carga de las físicas
+                physicCmpFromImage(phWorld, imageCmp.image, BodyDef.BodyType.DynamicBody){ phCmp, width, height ->
+                    box(width, height){
+                        isSensor = false
+                        //userData = "INTERACTION_SENSOR"
+                    }
+                }
+
             }
         }
         world.remove(entity)
