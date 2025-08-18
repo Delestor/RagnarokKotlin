@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.viewport.ExtendViewport
 import com.cadena.ragnarok.component.AnimationComponent
+import com.cadena.ragnarok.component.AnimationModel
 import com.cadena.ragnarok.component.AnimationType
 import com.cadena.ragnarok.component.ImageComponent
 import com.cadena.ragnarok.component.ImageComponent.Companion.ImageComponentListener
@@ -43,7 +44,7 @@ class GameScreen : KtxScreen {
                 }
             }
             add<AnimationComponent>{
-                nextAnimation("Novice_Male", AnimationType.WALK_LEFT)
+                nextAnimation(AnimationModel.NOVICE_MALE, AnimationType.WALK_LEFT)
             }
         }
 
@@ -55,7 +56,7 @@ class GameScreen : KtxScreen {
                 }
             }
             add<AnimationComponent>{
-                nextAnimation("Poring", AnimationType.IDLE)
+                nextAnimation(AnimationModel.PORING, AnimationType.IDLE)
             }
         }
     }

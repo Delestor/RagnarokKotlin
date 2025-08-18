@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 
 enum class AnimationModel{
+    NOVICE_MALE, PORING, UNDEFINED;
 
+    val atlasKey: String = this.toString().lowercase()
 }
 
 enum class AnimationType{
@@ -14,7 +16,7 @@ enum class AnimationType{
 }
 
 class AnimationComponent (
-    var atlasKey: String = "",
+    var model: AnimationModel = AnimationModel.UNDEFINED,
     var stateTime : Float = 0f,
     var playMode : Animation.PlayMode = Animation.PlayMode.LOOP
 ){
@@ -22,13 +24,13 @@ class AnimationComponent (
 
     var nextAnimation: String = NO_ANIMATION
 
-    fun nextAnimation(atlasKey: String, type: AnimationType) {
-        this.atlasKey = atlasKey
-        nextAnimation = "$atlasKey/${type.atlasKey}"
+    fun nextAnimation(model: AnimationModel, type: AnimationType) {
+        this.model = model
+        nextAnimation = "${model.atlasKey}/${type.atlasKey}"
     }
 
     fun nextAnimation(type: AnimationType) {
-        nextAnimation = "$atlasKey/${type.atlasKey}"
+        nextAnimation = "${model.atlasKey}/${type.atlasKey}"
     }
 
     fun clearAnimation() {
