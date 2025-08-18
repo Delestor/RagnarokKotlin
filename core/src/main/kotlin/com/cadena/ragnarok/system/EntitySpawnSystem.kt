@@ -1,5 +1,7 @@
 package com.cadena.ragnarok.system
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.scenes.scene2d.Event
 import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.ui.Image
@@ -12,6 +14,7 @@ import com.github.quillraven.fleks.ComponentMapper
 import com.github.quillraven.fleks.Entity
 import com.github.quillraven.fleks.IteratingSystem
 import ktx.app.gdxError
+import ktx.math.vec2
 import ktx.tiled.layer
 import ktx.tiled.type
 import ktx.tiled.x
@@ -19,18 +22,21 @@ import ktx.tiled.y
 
 @AllOf([SpawnComponent::class])
 class EntitySpawnSystem(
+    private val atlas:TextureAtlas,
     private val spawnCmps:ComponentMapper<SpawnComponent>
 ) : EventListener, IteratingSystem(){
     private val cachedCfgs = mutableMapOf<String, SpawnCfg>()
+    private val cachedSizes = mutableMapOf<AnimationModel, Vector2>()
 
     override fun onTickEntity(entity: Entity) {
         with(spawnCmps[entity]){
             val cfg = spawnCfg(type)
+            val relativeSize = size(cfg.model)
             world.entity{
                 add<ImageComponent>{
                     image = Image().apply {
                         setPosition(location.x, location.y)
-                        setSize(1f, 1f)
+                        setSize(relativeSize.x, relativeSize.y)
                         setScaling(Scaling.fill)
                     }
                 }
@@ -48,6 +54,16 @@ class EntitySpawnSystem(
             "poring" -> SpawnCfg(AnimationModel.PORING)
             else -> gdxError("Type $type has no SpawnCfg setup.")
         }
+    }
+
+    private fun size(model : AnimationModel) = cachedSizes.getOrPut(model){
+        val regions = atlas.findRegions("${model.atlasKey}/${AnimationType.IDLE.atlasKey}")
+        if (regions.isEmpty) {
+            gdxError("There are no texture regions for $model")
+        }
+        val firstFrame = regions.first()
+        vec2(firstFrame.originalWidth* UNIT_SCALE, firstFrame.originalHeight* UNIT_SCALE)
+
     }
 
     override fun handle(event: Event): Boolean {

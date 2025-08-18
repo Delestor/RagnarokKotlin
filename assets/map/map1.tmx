@@ -14,7 +14,7 @@
  </tileset>
  <layer id="1" name="ground" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYWBgYBnFo3gUj+JhghnxYFrax4oHU9MtxNhHrFtIsZNc+3C5gd52ovufnnYSsp/WdmKzn552jlQMAEHwCdM=
+   eJxjYWBgYBnFo3gUj+JhghnxYFrax4oHU9MtxNhHrFtIsZNc+3C5gRg7malsL7L/6eFPYu2ntZ3Y7KennSMVAwA8cAnR
   </data>
  </layer>
  <layer id="2" name="bgd_1" width="30" height="20">
