@@ -3,6 +3,8 @@ package com.cadena.ragnarok.screen
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.graphics.g2d.TextureRegion
+import com.badlogic.gdx.maps.tiled.TmxMapLoader
+import com.badlogic.gdx.scenes.scene2d.EventListener
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.viewport.ExtendViewport
@@ -11,6 +13,8 @@ import com.cadena.ragnarok.component.AnimationModel
 import com.cadena.ragnarok.component.AnimationType
 import com.cadena.ragnarok.component.ImageComponent
 import com.cadena.ragnarok.component.ImageComponent.Companion.ImageComponentListener
+import com.cadena.ragnarok.event.MapChangeEvent
+import com.cadena.ragnarok.event.fire
 import com.cadena.ragnarok.system.RenderSystem
 import com.github.quillraven.fleks.World
 import com.github.quillraven.mysticwoods.system.AnimationSystem
@@ -36,6 +40,14 @@ class GameScreen : KtxScreen {
 
     override fun show() {
         log.debug { "GameScreen HelloWorld!" }
+
+        world.systems.forEach { system ->
+            if(system is EventListener){
+                stage.addListener(system)
+            }
+        }
+        val tiledMap = TmxMapLoader().load("map/map1.tmx")
+        stage.fire(MapChangeEvent(tiledMap))
 
         world.entity{
             add<ImageComponent>{

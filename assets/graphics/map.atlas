@@ -1,0 +1,13 @@
+map.png
+size:512,128
+repeat:none
+bush_64x64
+bounds:73,3,64,64
+dirt_64x64
+bounds:283,3,64,64
+grass_64x64
+bounds:213,3,64,64
+grass_dirt_64x64
+bounds:3,3,64,64
+log_64x64
+bounds:143,3,64,64
