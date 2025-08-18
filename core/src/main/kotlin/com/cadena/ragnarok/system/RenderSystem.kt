@@ -11,6 +11,7 @@ import com.cadena.ragnarok.component.ImageComponent
 import com.cadena.ragnarok.event.MapChangeEvent
 import com.github.quillraven.fleks.*
 import com.github.quillraven.fleks.collection.compareEntity
+import ktx.assets.disposeSafely
 import ktx.graphics.use
 import ktx.tiled.forEachLayer
 
@@ -74,5 +75,9 @@ class RenderSystem(
         }
 
         return false
+    }
+
+    override fun onDispose() {
+        mapRenderer.disposeSafely()
     }
 }
