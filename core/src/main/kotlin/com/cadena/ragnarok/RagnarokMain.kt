@@ -28,16 +28,14 @@ class RagnarokMain : KtxGame<KtxScreen>(){
         log.debug { "Preparamos para enviar el mensaje." }
         val hints = SocketHints()
         //hints.connectTimeout = 4000
-        var client = Gdx.net.newClientSocket(Net.Protocol.TCP , "localhost", 9999, hints);
+        val client = Gdx.net.newClientSocket(Net.Protocol.TCP , "localhost", 9999, hints);
 
-        val output = PrintWriter(client.getOutputStream(), true)
-        val input = BufferedReader(InputStreamReader(client.inputStream))
+        client.sendMessage("Hola Mundo")
+        Thread.sleep(1000)
+        client.sendMessage("Mensaje 2")
+        Thread.sleep(1000)
+        client.sendMessage("Mensaje 3")
 
-        var mensaje = "Hello World from RagnarokKotlin"
-
-        println("El cliente envia: [$mensaje]")
-        output.println(mensaje)
-        //println("Client receiving [${input.readLine()}]")
         client.disposeSafely()
     }
 
@@ -45,4 +43,15 @@ class RagnarokMain : KtxGame<KtxScreen>(){
         const val UNIT_SCALE = 1/64f
         private val log = logger<GameScreen>()
     }
+}
+
+private fun Socket.sendMessage(mensaje:String) {
+    val output = PrintWriter(this.outputStream, true)
+    val input = BufferedReader(InputStreamReader(this.inputStream))
+
+    println("El cliente envia: [$mensaje]")
+    output.println(mensaje)
+
+    Thread {println("El cliente recibe: [${input.readLine()}]")}
+
 }
