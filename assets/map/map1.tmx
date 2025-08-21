@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="12">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="5" nextobjectid="16">
  <tileset firstgid="1" name="map" tilewidth="64" tileheight="64" spacing="6" margin="3" tilecount="7" columns="7">
   <image source="../graphics/map.png" width="512" height="128"/>
  </tileset>
- <tileset firstgid="8" name="entities" tilewidth="60" tileheight="71" tilecount="2" columns="0">
+ <tileset firstgid="8" name="entities" tilewidth="60" tileheight="102" tilecount="3" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image source="../../assets_raw/game/novice_male/walk_left_01.png" width="49" height="71"/>
   </tile>
   <tile id="1">
    <image source="../../assets_raw/game/poring/idle_01.png" width="60" height="48"/>
+  </tile>
+  <tile id="3">
+   <image source="../../assets_raw/game/npc_kafra/idle_01.png" width="53" height="102"/>
   </tile>
  </tileset>
  <layer id="1" name="ground" width="30" height="20">
@@ -35,5 +38,6 @@
   <object id="9" type="poring" gid="9" x="156" y="868" width="60" height="48"/>
   <object id="10" type="poring" gid="9" x="240" y="882" width="60" height="48"/>
   <object id="11" type="poring" gid="9" x="262" y="944" width="60" height="48"/>
+  <object id="15" type="npc_kafra" gid="11" x="384" y="1152" width="53" height="102"/>
  </objectgroup>
 </map>

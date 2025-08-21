@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Animation
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable
 
 enum class AnimationModel{
-    NOVICE_MALE, PORING, UNDEFINED;
+    NOVICE_MALE, PORING, NPC_KAFRA, UNDEFINED;
 
     val atlasKey: String = this.toString().lowercase()
 }

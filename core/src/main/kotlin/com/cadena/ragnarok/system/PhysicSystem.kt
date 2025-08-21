@@ -1,6 +1,14 @@
 package com.cadena.ragnarok.system
 
 import com.badlogic.gdx.math.MathUtils
+import com.badlogic.gdx.physics.box2d.BodyDef
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.StaticBody
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
+import com.badlogic.gdx.physics.box2d.Contact
+import com.badlogic.gdx.physics.box2d.ContactImpulse
+import com.badlogic.gdx.physics.box2d.ContactListener
+import com.badlogic.gdx.physics.box2d.Fixture
+import com.badlogic.gdx.physics.box2d.Manifold
 import com.badlogic.gdx.physics.box2d.World
 import com.cadena.ragnarok.component.ImageComponent
 import com.cadena.ragnarok.component.PhysicComponent
@@ -14,7 +22,11 @@ class PhysicSystem(
     private val phWorld: World,
     private val imageCmps: ComponentMapper<ImageComponent>,
     private val physicCmps: ComponentMapper<PhysicComponent>
-) : IteratingSystem(interval = Fixed(1 / 60f)) {
+) : ContactListener, IteratingSystem(interval = Fixed(1 / 60f)) {
+
+    init {
+        phWorld.setContactListener(this)
+    }
 
     override fun onUpdate() {
         if (phWorld.autoClearForces) {
@@ -55,6 +67,29 @@ class PhysicSystem(
                 MathUtils.lerp(prevY, bodyY, alpha) - height * 0.5f
             )
         }
+    }
+
+    override fun beginContact(contact: Contact?) {
+
+    }
+
+    override fun endContact(contact: Contact?) {
+
+    }
+
+    private fun Fixture.isStaticBody() = this.body.type == StaticBody
+    private fun Fixture.isDynamicBody() = this.body.type == DynamicBody
+
+    override fun preSolve(contact: Contact, oldMainfold: Manifold) {
+        contact.isEnabled = (contact.fixtureA.isStaticBody() && contact.fixtureB.isDynamicBody()) ||
+            (contact.fixtureA.isDynamicBody() && contact.fixtureB.isStaticBody())
+    }
+
+    override fun postSolve(
+        contact: Contact?,
+        impulse: ContactImpulse?
+    ) {
+
     }
 
     companion object {

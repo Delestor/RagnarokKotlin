@@ -3,6 +3,8 @@ package com.cadena.ragnarok.system
 import com.badlogic.gdx.graphics.g2d.TextureAtlas
 import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.physics.box2d.BodyDef
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.DynamicBody
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType.StaticBody
 import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Event
 import com.badlogic.gdx.scenes.scene2d.EventListener
@@ -54,8 +56,11 @@ class EntitySpawnSystem(
                 }
 
                 //Carga de las físicas
-                physicCmpFromImage(phWorld, imageCmp.image, BodyDef.BodyType.DynamicBody){ phCmp, width, height ->
-                    box(width, height){
+                physicCmpFromImage(phWorld, imageCmp.image, cfg.bodyType){ phCmp, width, height ->
+                    val w = width*cfg.physicScaling.x
+                    val h = height*cfg.physicScaling.y
+
+                    box(w, h, cfg.physicOffset){
                         isSensor = false
                         //userData = "INTERACTION_SENSOR"
                     }
@@ -78,8 +83,21 @@ class EntitySpawnSystem(
 
     private fun spawnCfg(type:String):SpawnCfg = cachedCfgs.getOrPut(type){
         when (type) {
-            "novice_male" -> SpawnCfg(AnimationModel.NOVICE_MALE)
-            "poring" -> SpawnCfg(AnimationModel.PORING)
+            "novice_male" -> SpawnCfg(
+                AnimationModel.NOVICE_MALE,
+                physicScaling = vec2(0.9f, 1.2f),
+                physicOffset = vec2(0f, +10f*UNIT_SCALE)
+            )
+            "poring" -> SpawnCfg(
+                AnimationModel.PORING,
+                physicScaling = vec2(0.9f, 0.9f)
+            )
+            "npc_kafra" -> SpawnCfg(
+                AnimationModel.NPC_KAFRA,
+                speedScaling = 0f,
+                physicScaling = vec2(0.9f, 0.9f),
+                bodyType = StaticBody
+            )
             else -> gdxError("Type $type has no SpawnCfg setup.")
         }
     }
