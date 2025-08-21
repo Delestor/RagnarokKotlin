@@ -6,11 +6,10 @@ import java.io.InputStreamReader
 import java.io.PrintWriter
 import java.net.Socket
 import kotlin.random.Random
-import kotlin.random.nextLong
 
 class ConnectionSocket : Socket() {
 
-    fun sendMessageToServer(titulo: String) {
+    suspend fun sendMessageToServer(titulo: String) {
         val hints = SocketHints()
         //hints.connectTimeout = 4000
         //val client = Gdx.net.newClientSocket(Net.Protocol.TCP , "localhost", 9999, hints);
@@ -19,16 +18,10 @@ class ConnectionSocket : Socket() {
         val waitTime: Long = Random.nextLong(0, 100)
 
         client.sendMessage("$titulo Hola Mundo")
-        Thread.sleep(waitTime)
-        client.sendMessage("$titulo Mensaje 2")
-        Thread.sleep(waitTime)
-        client.sendMessage("$titulo Mensaje 3")
-        Thread.sleep(waitTime)
-        client.sendMessage("$titulo Mensaje 4")
-        Thread.sleep(waitTime)
-        client.sendMessage("$titulo Mensaje 5")
+
 
         client.close()
+
     }
 
     private fun Socket.sendMessage(mensaje: String) {
