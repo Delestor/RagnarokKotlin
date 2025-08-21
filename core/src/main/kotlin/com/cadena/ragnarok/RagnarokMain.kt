@@ -16,7 +16,7 @@ class RagnarokMain : KtxGame<KtxScreen>(){
         addScreen(GameScreen())
         setScreen<GameScreen>()
 
-        scope.taskSendMessageToServer()
+        //scope.taskSendMessageToServer()
     }
 
     private val scope = CoroutineScope(Dispatchers.IO)

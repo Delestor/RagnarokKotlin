@@ -5,8 +5,10 @@ import com.badlogic.gdx.Input
 import com.badlogic.gdx.Input.Keys.*
 import com.cadena.ragnarok.component.MoveComponent
 import com.cadena.ragnarok.component.PlayerComponent
+import com.cadena.ragnarok.connection.ConnectionSocket
 import com.github.quillraven.fleks.ComponentMapper
 import com.github.quillraven.fleks.World
+import kotlinx.coroutines.*
 import ktx.app.KtxInputAdapter
 
 class PlayerKeyboardInputProcessor(
@@ -44,10 +46,23 @@ class PlayerKeyboardInputProcessor(
                 RIGHT -> playerCos = 1f
                 LEFT -> playerCos = -1f
             }
+            scope.taskSendMessageToServer(keycode.toString())
             updatePlayerMovement()
             return true
         }
         return false
+    }
+
+    private val scope = CoroutineScope(Dispatchers.IO)
+    private var job2 : Job? = null
+
+    private fun CoroutineScope.taskSendMessageToServer(tecla:String){
+        job2 = launch {
+            println("===Conexión===")
+            val connection = ConnectionSocket()
+            connection.sendMessageToServer("Soy el cliente, y he presionado la tecla $tecla")
+            println("===Finaliza Conexión===")
+        }
     }
 
     override fun keyUp(keycode: Int): Boolean {
