@@ -17,7 +17,7 @@ fun main() = runBlocking {
         launch {
             println("===Conexión $i===")
             var connection = ConnectionSocket()
-            connection.sendMessageToServer()
+            connection.sendMessageToServer("Soy el cliente $i")
             println("===Finaliza Conexión $i===")
         }
     }
