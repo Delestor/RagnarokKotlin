@@ -60,14 +60,14 @@ class PlayerKeyboardInputProcessor(
 
     private fun CoroutineScope.taskSendMessageToServer(tecla:String){
         job2 = launch {
-            println("===Conexión===")
+            log.debug {"===Conexión==="}
             try {
                 val connection = ConnectionSocket()
                 connection.sendMessageToServer("Soy el cliente, y he presionado la tecla $tecla")
             }catch (e: Exception){
                 log.debug { "The Server is not reachable." }
             }
-            println("===Finaliza Conexión===")
+            log.debug {"===Finaliza Conexión==="}
         }
     }
 

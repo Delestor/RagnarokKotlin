@@ -1,6 +1,8 @@
 package com.cadena.ragnarok.connection
 
 import com.badlogic.gdx.net.SocketHints
+import com.cadena.ragnarok.input.PlayerKeyboardInputProcessor
+import ktx.log.logger
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.PrintWriter
@@ -28,9 +30,13 @@ class ConnectionSocket : Socket() {
         val output = PrintWriter(this.outputStream, true)
         val input = BufferedReader(InputStreamReader(this.inputStream))
 
-        println("El cliente envia: [$mensaje]")
+        log.debug {("El cliente envia: [$mensaje]")}
         output.println(mensaje)
 
-        println("El cliente recibe: [${input.readLine()}]")
+        log.debug {"El cliente recibe: [${input.readLine()}]"}
+    }
+
+    companion object{
+        private val log = logger<ConnectionSocket>()
     }
 }
